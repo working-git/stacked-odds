@@ -12,27 +12,27 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- risotto theme -->
-<link id="palette-css" rel="stylesheet" href="{{ printf "css/palettes/%s.css" (.Site.Params.theme.palette | default "base16-dark") | absURL }}">
+<link id="palette-css" rel="stylesheet" href="{{ printf "css/palettes/%s.css" (.Site.Params.theme.palette | default "base16-dark") | relURL }}">
 <script>
 (function () {
   try {
     var saved = localStorage.getItem('rp-palette');
     if (saved) {
-      document.getElementById('palette-css').href = '{{ "css/palettes/" | absURL }}' + saved + '.css';
+      document.getElementById('palette-css').href = '{{ "css/palettes/" | relURL }}' + saved + '.css';
     }
   } catch (e) {}
 })();
 </script>
-<link rel="stylesheet" href="{{ "css/risotto.css" | absURL }}">
-<link rel="stylesheet" href="{{ "css/custom.css" | absURL }}">
+<link rel="stylesheet" href="{{ "css/risotto.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/custom.css" | relURL }}">
 
 <!-- favicon -->
-{{ if os.FileExists "static/favicon.svg" }}<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | absURL }}">{{ end }}
-{{ if os.FileExists "static/favicon.ico" }}<link rel="icon" href="{{ "favicon.ico" | absURL }}">{{ end }}
-{{ if os.FileExists "static/favicon-32x32.png" }}<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | absURL }}">{{ end }}
-{{ if os.FileExists "static/favicon-16x16.png" }}<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | absURL }}">{{ end }}
-{{ if os.FileExists "static/apple-touch-icon.png" }}<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | absURL }}">{{ end }}
-{{ if os.FileExists "static/site.webmanifest" }}<link rel="manifest" href="{{ "site.webmanifest" | absURL }}">{{ end }}
+{{ if os.FileExists "static/favicon.svg" }}<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">{{ end }}
+{{ if os.FileExists "static/favicon.ico" }}<link rel="icon" href="{{ "favicon.ico" | relURL }}">{{ end }}
+{{ if os.FileExists "static/favicon-32x32.png" }}<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">{{ end }}
+{{ if os.FileExists "static/favicon-16x16.png" }}<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">{{ end }}
+{{ if os.FileExists "static/apple-touch-icon.png" }}<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">{{ end }}
+{{ if os.FileExists "static/site.webmanifest" }}<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">{{ end }}
 
 <!-- RSS header-->
 {{ with .OutputFormats.Get "rss" -}}

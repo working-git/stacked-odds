@@ -73,7 +73,7 @@
           select.addEventListener('change', function () {
             var value = select.value;
             if (valid.indexOf(value) === -1) return;
-            link.href = '{{ "css/palettes/" | absURL }}' + value + '.css';
+            link.href = '{{ "css/palettes/" | relURL }}' + value + '.css';
             try { localStorage.setItem('rp-palette', value); } catch (e) {}
           });
         })();
