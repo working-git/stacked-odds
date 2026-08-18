@@ -1,0 +1,15 @@
+{{- $valid := slice "love" "gold" "rose" "pine" "foam" "iris" "clover" "text" "subtle" "muted" -}}
+{{- $name := .Get 0 | default "text" -}}
+{{- if not (in $valid $name) -}}
+  {{- errorf "color shortcode: %q is not a Rosé Pine colour (use one of %v) — %s" $name $valid .Position -}}
+{{- end -}}
+{{- $variant := .Get 1 -}}
+{{- $class := printf "rp-%s" $name -}}
+{{- if eq $variant "bg" -}}
+  {{- $class = printf "rp-bg-%s" $name -}}
+{{- end -}}
+{{- /* No trailing newline after </span>: shortcode output is spliced
+   verbatim into the markdown source, and a stray newline here becomes
+   a literal space when this shortcode butts up against punctuation
+   (e.g. "green ." instead of "green."). */ -}}
+<span class="{{ $class }}">{{ .Page.RenderString (dict "display" "inline") .Inner }}</span>

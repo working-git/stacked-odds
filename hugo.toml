@@ -1,0 +1,26 @@
+baseURL = 'https://unluckygesture.com/'
+locale = 'en-us'
+title = 'Stacking the Odds'
+theme = 'risotto'
+
+[languages.en]
+label = 'English'
+weight = 1
+
+[params.theme]
+palette = 'rosepine-moon'
+
+[markup.highlight]
+noClasses = false
+
+[[menu.main]]
+identifier = "quests"
+name = "side-quests"
+url = "/side-quest/"
+weight = 10
+
+[[menu.main]]
+identifier = "coin-flip"
+name = "coin flip"
+url = "/coin-flip/"
+weight = 20

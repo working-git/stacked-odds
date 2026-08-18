@@ -1,0 +1,2 @@
+{{- partial "lang.html" . -}}
+<p class="copyright">{{ with .Site.Copyright }}{{ . | markdownify }}{{ else }}&copy; {{ now.Format "2006" }} {{ site.Title }}{{ end }}</p>

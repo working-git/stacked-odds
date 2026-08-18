@@ -1,0 +1,123 @@
+/* Chroma syntax highlighting, coloured per Rosé Pine's code-highlighting
+   guidance (https://rosepinetheme.com/palette): love for keywords/tags,
+   gold for functions/classes, rose for decorators/exceptions, pine for
+   strings, foam for builtins/attributes, iris for numbers/constants,
+   muted for comments, subtle for punctuation. Requires
+   [markup.highlight] noClasses = false in hugo.toml. */
+
+/* !important needed to beat typography.css's `pre, code {background !important}` */
+.chroma {
+  color: var(--rp-text) !important;
+  background-color: var(--rp-surface) !important;
+}
+
+.chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
+.chroma .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; }
+.chroma .hl { background-color: var(--rp-hl-med); }
+.chroma .lnt,
+.chroma .ln {
+  white-space: pre;
+  user-select: none;
+  margin-right: 0.4em;
+  padding: 0 0.4em 0 0.4em;
+  color: var(--rp-muted);
+}
+.chroma .line { display: flex; }
+
+/* Errors */
+.chroma .err { color: var(--rp-love); }
+
+/* Keywords, tags */
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kp,
+.chroma .kr,
+.chroma .kt,
+.chroma .nt,
+.chroma .ow,
+.chroma .o { color: var(--rp-love); }
+
+/* Functions, classes */
+.chroma .nf,
+.chroma .fm,
+.chroma .nc { color: var(--rp-gold); }
+
+/* Decorators, exceptions, entities */
+.chroma .nd,
+.chroma .ne,
+.chroma .ni { color: var(--rp-rose); }
+
+/* Strings */
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .dl,
+.chroma .sd,
+.chroma .s2,
+.chroma .se,
+.chroma .sh,
+.chroma .si,
+.chroma .sx,
+.chroma .sr,
+.chroma .s1,
+.chroma .ss { color: var(--rp-pine); }
+
+/* Builtins, attributes, properties */
+.chroma .na,
+.chroma .nb,
+.chroma .bp,
+.chroma .py { color: var(--rp-foam); }
+
+/* Numbers, constants, labels */
+.chroma .l,
+.chroma .ld,
+.chroma .m,
+.chroma .mb,
+.chroma .mf,
+.chroma .mh,
+.chroma .mi,
+.chroma .il,
+.chroma .mo,
+.chroma .no,
+.chroma .nl,
+.chroma .vc,
+.chroma .vg,
+.chroma .vi,
+.chroma .vm { color: var(--rp-iris); }
+
+/* Plain names, variables, namespaces */
+.chroma .n,
+.chroma .nv,
+.chroma .nn,
+.chroma .nx { color: var(--rp-text); }
+
+/* Punctuation */
+.chroma .p,
+.chroma .or { color: var(--rp-subtle); }
+
+/* Comments */
+.chroma .c,
+.chroma .ch,
+.chroma .cm,
+.chroma .c1,
+.chroma .cs,
+.chroma .cp,
+.chroma .cpf {
+  color: var(--rp-muted-text);
+  font-style: italic;
+}
+
+/* Diffs */
+.chroma .gd { color: var(--rp-love); }
+.chroma .gi { color: var(--rp-pine); }
+.chroma .gh,
+.chroma .gu { color: var(--rp-iris); font-weight: bold; }
+.chroma .gs { font-weight: bold; }
+.chroma .ge { font-style: italic; }
+.chroma .gr,
+.chroma .gt { color: var(--rp-love); }
+.chroma .go { color: var(--rp-subtle); }
+.chroma .gp { color: var(--rp-muted-text); }

@@ -1,0 +1,45 @@
+{{ define "main" }}
+    <header class="content__header">
+        <p class="content__prompt"><span class="prompt-glyph">❯</span> cat {{ .File.LogicalName }}</p>
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="content__body">
+        {{ .Content }}
+    </div>
+    <footer class="content__footer">
+        {{ $prev := .PrevInSection }}
+        {{ $next := .NextInSection }}
+        {{ if or $prev $next }}
+        <nav class="post-nav">
+            {{ with $prev }}<a class="post-nav__link post-nav__link--prev" href="{{ .Permalink }}">&larr; {{ .Title | markdownify }}</a>{{ end }}
+            {{ with $next }}<a class="post-nav__link post-nav__link--next" href="{{ .Permalink }}">{{ .Title | markdownify }} &rarr;</a>{{ end }}
+        </nav>
+        {{ end }}
+    </footer>
+{{ end }}
+
+{{define "aside" }}
+    {{ if .Params.description }}<p>{{ .Params.description }}</p>{{ end }}
+    {{ if or (.Params.author) (.Params.date) }}
+        <p>
+            {{ if .Params.author }}By {{ .Params.author }}{{ if .Date }}, {{ end }}{{ end }}
+            {{ if .Date }}{{ .Date.Format "2006-01-02" }}{{ end }}
+        </p>
+    {{ end }}
+
+    <p class="content__meta">{{ .ReadingTime }} min read &middot; {{ .WordCount }} words</p>
+
+    {{ with .GetTerms "tags" }}
+    <ul class="tag-list">
+        {{ range . }}
+        <li><a href="{{ .Permalink }}">#{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+    {{ end }}
+
+    {{ if and (.Params.toc) (.TableOfContents) }}
+	    <hr>
+	    On this page:
+	    {{ .TableOfContents }}
+    {{ end }}
+{{ end }}

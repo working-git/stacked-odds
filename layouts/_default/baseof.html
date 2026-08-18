@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="{{- site.Language.Lang -}}">
+
+    <head>
+        {{- partial "head.html" . -}}
+    </head>
+
+    <body>
+        {{- $palettes := slice "rosepine-moon" "dracula" "tokyo-night-dark" "tokyo-night-light" "gruvbox-dark" "gruvbox-light" "solarized-dark" "solarized-light" "base16-dark" "base16-light" "papercolor-dark" "papercolor-light" "material" "apprentice" "tender" "windows-95" "windows-95-light" -}}
+        {{- $currentPalette := site.Params.theme.palette | default "base16-dark" -}}
+        <div class="terminal">
+
+            <div class="terminal__titlebar">
+                <span class="terminal__dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="terminal__path">~/{{ site.Title | urlize }} — zsh</span>
+                <span class="terminal__tag-wrap">
+                    <select class="terminal__tag" id="palette-select" aria-label="Colour palette">
+                        {{- range $palettes }}
+                        <option value="{{ . }}"{{ if eq . $currentPalette }} selected{{ end }}>{{ . }}</option>
+                        {{- end }}
+                    </select>
+                    <span class="terminal__tag-arrow" aria-hidden="true">⌄</span>
+                </span>
+            </div>
+
+            <div class="page">
+
+                <header class="page__header">
+                    {{- partial "header.html" . -}}
+                </header>
+
+                <nav class="page__sidebar">
+                    {{- partial "sidebar-nav.html" . -}}
+                </nav>
+
+                <section class="page__body">
+                    {{- block "main" . }}{{- end }}
+                </section>
+
+                <section class="page__aside">
+                    {{- if or site.Params.about site.Params.socialLinks }}
+                    <div class="aside__about">
+                        {{- partial "about.html" . -}}
+                    </div>
+                    <hr>
+                    {{- end }}
+                    <div class="aside__sysinfo">
+                        {{- partial "sysinfo.html" . -}}
+                    </div>
+                    <hr>
+                    <div class="aside__content">
+                        {{- block "aside" . }}{{- end }}
+                    </div>
+                </section>
+
+                <footer class="page__footer">
+                    {{- partial "footer.html" . -}}
+                </footer>
+
+            </div>
+        </div>
+        <script>
+        (function () {
+          var select = document.getElementById('palette-select');
+          var link = document.getElementById('palette-css');
+          if (!select || !link) return;
+          var valid = {{ $palettes | jsonify | safeJS }};
+          var saved = null;
+          try { saved = localStorage.getItem('rp-palette'); } catch (e) {}
+          if (saved && valid.indexOf(saved) !== -1) {
+            select.value = saved;
+          }
+          select.addEventListener('change', function () {
+            var value = select.value;
+            if (valid.indexOf(value) === -1) return;
+            link.href = '{{ "css/palettes/" | absURL }}' + value + '.css';
+            try { localStorage.setItem('rp-palette', value); } catch (e) {}
+          });
+        })();
+        </script>
+        <script>
+        (function () {
+          function fallbackCopy(text) {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
+          }
+
+          document.addEventListener('click', function (e) {
+            var btn = e.target.closest && e.target.closest('.code-block__copy');
+            if (!btn) return;
+            var block = btn.closest('.code-block');
+            var code = block && block.querySelector('.code-block__body pre');
+            if (!code) return;
+            var text = code.textContent.replace(/\n+$/, '');
+
+            var onDone = function () {
+              var label = btn.querySelector('.code-block__copy-label');
+              var original = label.textContent;
+              label.textContent = 'copied';
+              btn.classList.add('is-copied');
+              clearTimeout(btn._copyResetTimer);
+              btn._copyResetTimer = setTimeout(function () {
+                label.textContent = original;
+                btn.classList.remove('is-copied');
+              }, 1500);
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(onDone, function () {
+                fallbackCopy(text);
+                onDone();
+              });
+            } else {
+              fallbackCopy(text);
+              onDone();
+            }
+          });
+        })();
+        </script>
+        <script>
+        (function () {
+          // Reshuffle each "quote" shortcode's fortune card suit/colour on
+          // every page view, so a lone quote doesn't always land on the
+          // same suit.
+          // The server-rendered suit (from data-suits/data-tones) is the
+          // no-JS fallback and stays put if this doesn't run.
+          var cards = document.querySelectorAll('.fortune-card[data-suits]');
+          for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var suits = card.getAttribute('data-suits').split(',');
+            var tones = card.getAttribute('data-tones').split(',');
+            var pick = Math.floor(Math.random() * tones.length);
+
+            card.className = card.className.replace(/\bfortune-card--\S+/, 'fortune-card--' + tones[pick]);
+
+            var suitEl = card.querySelector('.fortune-card__suit');
+            if (suitEl) suitEl.textContent = suits[pick];
+          }
+        })();
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,64 @@
+/* Rosé Pine Moon (https://rosepinetheme.com) reference palette.
+   Fixed values, independent of the active site palette, so content authored
+   with these utilities/shortcodes stays true Rosé Pine even if the site
+   palette is switched later. */
+
+:root {
+  --rp-base: #232136;
+  --rp-surface: #2a273f;
+  --rp-overlay: #393552;
+  --rp-muted: #6e6a86;
+  /* Lightened muted, for actual readable text (dates, captions, comments).
+     --rp-muted itself fails WCAG AA at small sizes (~2.8-3:1) — reserve it
+     for decorative use (dividers, tree glyphs) and use this for copy. */
+  --rp-muted-text: #938fae;
+  --rp-subtle: #908caa;
+  --rp-text: #e0def4;
+  --rp-love: #eb6f92;
+  --rp-gold: #f6c177;
+  --rp-rose: #ea9a97;
+  --rp-pine: #3e8fb0;
+  --rp-foam: #9ccfd8;
+  --rp-iris: #c4a7e7;
+  --rp-hl-low: #2a283e;
+  --rp-hl-med: #44415a;
+  --rp-hl-high: #56526e;
+  /* Not part of upstream Rosé Pine — added for luck/four-leaf-clover accents.
+     Same lightness/saturation family as --rp-foam, hue-rotated to green so it
+     sits naturally next to the rest of the palette instead of clashing. */
+  --rp-clover: #9ccf9c;
+}
+
+/* Text colour utilities, e.g. <span class="rp-love">...</span>.
+   Used by the {{< color >}} shortcode — see layouts/shortcodes/color.html */
+.rp-love   { color: var(--rp-love); }
+.rp-gold   { color: var(--rp-gold); }
+.rp-rose   { color: var(--rp-rose); }
+.rp-pine   { color: var(--rp-pine); }
+.rp-foam   { color: var(--rp-foam); }
+.rp-iris   { color: var(--rp-iris); }
+.rp-clover { color: var(--rp-clover); }
+.rp-text   { color: var(--rp-text); }
+.rp-subtle { color: var(--rp-subtle); }
+.rp-muted  { color: var(--rp-muted); }
+
+/* Highlighter/marker variants: {{< color "gold" "bg" >}}...{{< /color >}} */
+.rp-bg-love,
+.rp-bg-gold,
+.rp-bg-rose,
+.rp-bg-pine,
+.rp-bg-foam,
+.rp-bg-iris,
+.rp-bg-clover {
+  border-radius: 0.2em;
+  padding: 0.05em 0.35em;
+  color: var(--rp-base);
+}
+
+.rp-bg-love { background-color: var(--rp-love); }
+.rp-bg-gold { background-color: var(--rp-gold); }
+.rp-bg-rose { background-color: var(--rp-rose); }
+.rp-bg-pine { background-color: var(--rp-pine); color: var(--rp-text); }
+.rp-bg-foam { background-color: var(--rp-foam); }
+.rp-bg-iris { background-color: var(--rp-iris); }
+.rp-bg-clover { background-color: var(--rp-clover); }

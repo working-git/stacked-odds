@@ -1,0 +1,228 @@
+{{ define "main" }}
+    <header class="content__header">
+        <p class="content__prompt"><span class="prompt-glyph">❯</span> ./{{ .File.LogicalName }}</p>
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="content__body">
+        {{ .Content }}
+
+        <div class="coinflip">
+            <button type="button" class="coinflip__coin" id="coinflip-coin" aria-label="Flip the coin">
+                <span class="coinflip__inner" id="coinflip-inner">
+                    <svg class="coinflip__face coinflip__face--heads" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+                        <g class="coinflip__fill">
+                            <rect x="5" y="2" width="6" height="1"/>
+                            <rect x="4" y="3" width="8" height="1"/>
+                            <rect x="3" y="4" width="2" height="1"/>
+                            <rect x="6" y="4" width="3" height="1"/>
+                            <rect x="10" y="4" width="3" height="1"/>
+                            <rect x="2" y="5" width="3" height="1"/>
+                            <rect x="6" y="5" width="3" height="1"/>
+                            <rect x="10" y="5" width="4" height="1"/>
+                            <rect x="2" y="6" width="3" height="1"/>
+                            <rect x="6" y="6" width="3" height="1"/>
+                            <rect x="10" y="6" width="4" height="1"/>
+                            <rect x="2" y="7" width="3" height="1"/>
+                            <rect x="10" y="7" width="4" height="1"/>
+                            <rect x="2" y="8" width="3" height="1"/>
+                            <rect x="6" y="8" width="3" height="1"/>
+                            <rect x="10" y="8" width="4" height="1"/>
+                            <rect x="2" y="9" width="3" height="1"/>
+                            <rect x="6" y="9" width="3" height="1"/>
+                            <rect x="10" y="9" width="4" height="1"/>
+                            <rect x="2" y="10" width="3" height="1"/>
+                            <rect x="6" y="10" width="3" height="1"/>
+                            <rect x="10" y="10" width="4" height="1"/>
+                            <rect x="3" y="11" width="10" height="1"/>
+                            <rect x="4" y="12" width="8" height="1"/>
+                            <rect x="5" y="13" width="6" height="1"/>
+                        </g>
+                        <g class="coinflip__rim">
+                            <rect x="7" y="0" width="2" height="1"/>
+                            <rect x="4" y="1" width="8" height="1"/>
+                            <rect x="3" y="2" width="2" height="1"/>
+                            <rect x="11" y="2" width="2" height="1"/>
+                            <rect x="2" y="3" width="2" height="1"/>
+                            <rect x="12" y="3" width="2" height="1"/>
+                            <rect x="1" y="4" width="2" height="1"/>
+                            <rect x="13" y="4" width="2" height="1"/>
+                            <rect x="1" y="5" width="1" height="1"/>
+                            <rect x="14" y="5" width="1" height="1"/>
+                            <rect x="1" y="6" width="1" height="1"/>
+                            <rect x="14" y="6" width="1" height="1"/>
+                            <rect x="0" y="7" width="2" height="1"/>
+                            <rect x="14" y="7" width="2" height="1"/>
+                            <rect x="0" y="8" width="2" height="1"/>
+                            <rect x="14" y="8" width="2" height="1"/>
+                            <rect x="1" y="9" width="1" height="1"/>
+                            <rect x="14" y="9" width="1" height="1"/>
+                            <rect x="1" y="10" width="1" height="1"/>
+                            <rect x="14" y="10" width="1" height="1"/>
+                            <rect x="1" y="11" width="2" height="1"/>
+                            <rect x="13" y="11" width="2" height="1"/>
+                            <rect x="2" y="12" width="2" height="1"/>
+                            <rect x="12" y="12" width="2" height="1"/>
+                            <rect x="3" y="13" width="2" height="1"/>
+                            <rect x="11" y="13" width="2" height="1"/>
+                            <rect x="4" y="14" width="8" height="1"/>
+                            <rect x="7" y="15" width="2" height="1"/>
+                        </g>
+                        <g class="coinflip__sym">
+                            <rect x="5" y="4" width="1" height="1"/>
+                            <rect x="9" y="4" width="1" height="1"/>
+                            <rect x="5" y="5" width="1" height="1"/>
+                            <rect x="9" y="5" width="1" height="1"/>
+                            <rect x="5" y="6" width="1" height="1"/>
+                            <rect x="9" y="6" width="1" height="1"/>
+                            <rect x="5" y="7" width="5" height="1"/>
+                            <rect x="5" y="8" width="1" height="1"/>
+                            <rect x="9" y="8" width="1" height="1"/>
+                            <rect x="5" y="9" width="1" height="1"/>
+                            <rect x="9" y="9" width="1" height="1"/>
+                            <rect x="5" y="10" width="1" height="1"/>
+                            <rect x="9" y="10" width="1" height="1"/>
+                        </g>
+                    </svg>
+                    <svg class="coinflip__face coinflip__face--tails" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+                        <g class="coinflip__fill">
+                            <rect x="5" y="2" width="6" height="1"/>
+                            <rect x="4" y="3" width="8" height="1"/>
+                            <rect x="3" y="4" width="2" height="1"/>
+                            <rect x="10" y="4" width="3" height="1"/>
+                            <rect x="2" y="5" width="5" height="1"/>
+                            <rect x="8" y="5" width="6" height="1"/>
+                            <rect x="2" y="6" width="5" height="1"/>
+                            <rect x="8" y="6" width="6" height="1"/>
+                            <rect x="2" y="7" width="5" height="1"/>
+                            <rect x="8" y="7" width="6" height="1"/>
+                            <rect x="2" y="8" width="5" height="1"/>
+                            <rect x="8" y="8" width="6" height="1"/>
+                            <rect x="2" y="9" width="5" height="1"/>
+                            <rect x="8" y="9" width="6" height="1"/>
+                            <rect x="2" y="10" width="5" height="1"/>
+                            <rect x="8" y="10" width="6" height="1"/>
+                            <rect x="3" y="11" width="10" height="1"/>
+                            <rect x="4" y="12" width="8" height="1"/>
+                            <rect x="5" y="13" width="6" height="1"/>
+                        </g>
+                        <g class="coinflip__rim">
+                            <rect x="7" y="0" width="2" height="1"/>
+                            <rect x="4" y="1" width="8" height="1"/>
+                            <rect x="3" y="2" width="2" height="1"/>
+                            <rect x="11" y="2" width="2" height="1"/>
+                            <rect x="2" y="3" width="2" height="1"/>
+                            <rect x="12" y="3" width="2" height="1"/>
+                            <rect x="1" y="4" width="2" height="1"/>
+                            <rect x="13" y="4" width="2" height="1"/>
+                            <rect x="1" y="5" width="1" height="1"/>
+                            <rect x="14" y="5" width="1" height="1"/>
+                            <rect x="1" y="6" width="1" height="1"/>
+                            <rect x="14" y="6" width="1" height="1"/>
+                            <rect x="0" y="7" width="2" height="1"/>
+                            <rect x="14" y="7" width="2" height="1"/>
+                            <rect x="0" y="8" width="2" height="1"/>
+                            <rect x="14" y="8" width="2" height="1"/>
+                            <rect x="1" y="9" width="1" height="1"/>
+                            <rect x="14" y="9" width="1" height="1"/>
+                            <rect x="1" y="10" width="1" height="1"/>
+                            <rect x="14" y="10" width="1" height="1"/>
+                            <rect x="1" y="11" width="2" height="1"/>
+                            <rect x="13" y="11" width="2" height="1"/>
+                            <rect x="2" y="12" width="2" height="1"/>
+                            <rect x="12" y="12" width="2" height="1"/>
+                            <rect x="3" y="13" width="2" height="1"/>
+                            <rect x="11" y="13" width="2" height="1"/>
+                            <rect x="4" y="14" width="8" height="1"/>
+                            <rect x="7" y="15" width="2" height="1"/>
+                        </g>
+                        <g class="coinflip__sym">
+                            <rect x="5" y="4" width="5" height="1"/>
+                            <rect x="7" y="5" width="1" height="1"/>
+                            <rect x="7" y="6" width="1" height="1"/>
+                            <rect x="7" y="7" width="1" height="1"/>
+                            <rect x="7" y="8" width="1" height="1"/>
+                            <rect x="7" y="9" width="1" height="1"/>
+                            <rect x="7" y="10" width="1" height="1"/>
+                        </g>
+                    </svg>
+                </span>
+            </button>
+            <p class="coinflip__hint" id="coinflip-hint">click the coin to flip</p>
+            <p class="coinflip__result" id="coinflip-result" role="status" aria-live="polite"></p>
+        </div>
+    </div>
+    <footer class="content__footer">
+        {{ $prev := .PrevInSection }}
+        {{ $next := .NextInSection }}
+        {{ if or $prev $next }}
+        <nav class="post-nav">
+            {{ with $prev }}<a class="post-nav__link post-nav__link--prev" href="{{ .Permalink }}">&larr; {{ .Title | markdownify }}</a>{{ end }}
+            {{ with $next }}<a class="post-nav__link post-nav__link--next" href="{{ .Permalink }}">{{ .Title | markdownify }} &rarr;</a>{{ end }}
+        </nav>
+        {{ end }}
+    </footer>
+
+    <script>
+    (function () {
+        var coin = document.getElementById('coinflip-coin');
+        var inner = document.getElementById('coinflip-inner');
+        var result = document.getElementById('coinflip-result');
+        var hint = document.getElementById('coinflip-hint');
+        if (!coin || !inner || !result) return;
+
+        // Commit an explicit starting transform and force a style flush so
+        // the very first click transitions from a real "before" state.
+        // Without this, Chrome applies the first transform+duration change
+        // instantly (no animation) because both are being set on the
+        // element's inline style for the first time in the same tick.
+        inner.style.transform = 'rotateY(0deg)';
+        void inner.offsetHeight;
+
+        var spins = 0;
+        var flipping = false;
+
+        // Every flip adds a whole number of full rotations (360deg
+        // multiples), so the coin always settles back on the heads
+        // face -- the spin is real, the outcome is rigged.
+        var headsMessages = [
+            '10% spotted.',
+            'Rare: 10% spotted.',
+            'Lucky -- 10% spotted.',
+            '10% spotted, again.',
+            'Somehow, 10% spotted.',
+            'Odds be damned: 10% spotted.'
+        ];
+
+        coin.addEventListener('click', function () {
+            if (flipping) return;
+            flipping = true;
+
+            var extraSpins = 4 + Math.floor(Math.random() * 3); // 4-6 full turns
+            spins += extraSpins;
+
+            inner.style.transitionDuration = (extraSpins * 0.22).toFixed(2) + 's';
+            inner.style.transform = 'rotateY(' + (spins * 360) + 'deg)';
+
+            coin.classList.add('is-flipping');
+            coin.setAttribute('aria-disabled', 'true');
+            result.textContent = '';
+            if (hint) hint.hidden = true;
+        });
+
+        inner.addEventListener('transitionend', function (e) {
+            if (e.propertyName !== 'transform') return;
+            flipping = false;
+            coin.classList.remove('is-flipping');
+            coin.removeAttribute('aria-disabled');
+            var message = headsMessages[Math.floor(Math.random() * headsMessages.length)];
+            result.textContent = message;
+        });
+    })();
+    </script>
+{{ end }}
+
+{{ define "aside" }}
+    {{ if .Params.description }}<p>{{ .Params.description }}</p>{{ end }}
+
+    <p class="content__meta">house edge: 0% &middot; heads: 100%</p>
+{{ end }}

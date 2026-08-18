@@ -1,0 +1,35 @@
+{{- /*
+  Artistic pull-quote, styled as a dealt "fortune card" — a giant
+  translucent suit watermark, a gold corner mark, and a dashed
+  ticket-style border.
+
+  The suit/colour is reshuffled at random on every page view (see the
+  script in baseof.html), so a lone quote on a page doesn't always land
+  on the same suit. .Ordinal picks the server-rendered default (also
+  what's shown with JS disabled) so repeat calls on one page still
+  start out on different suits before the client-side shuffle runs.
+
+  Usage:
+    {{< quote author="Bruce Lee" >}}
+    You have to create your own luck.
+    {{< /quote >}}
+
+  `author` is optional; a bare positional arg also works:
+    {{< quote "Bruce Lee" >}}...{{< /quote >}}
+*/ -}}
+{{- $suits := slice "♠" "♥" "♦" "♣" "♣" -}}
+{{- $tones := slice "subtle" "love" "gold" "iris" "clover" -}}
+{{- $i := mod .Ordinal (len $tones) -}}
+{{- $suit := index $suits $i -}}
+{{- $tone := index $tones $i -}}
+{{- $author := .Get "author" -}}
+{{- if not $author -}}{{- $author = .Get 0 -}}{{- end -}}
+<figure class="fortune-card fortune-card--{{ $tone }}" data-suits="{{ delimit $suits `,` }}" data-tones="{{ delimit $tones `,` }}">
+    <span class="fortune-card__suit" aria-hidden="true">{{ $suit }}</span>
+    <blockquote class="fortune-card__quote">
+        <span class="fortune-card__mark" aria-hidden="true">&#8220;</span>{{ .Page.RenderString (dict "display" "block") .Inner }}
+    </blockquote>
+    {{- with $author }}
+    <figcaption class="fortune-card__cite">&mdash; {{ . }}</figcaption>
+    {{- end }}
+</figure>

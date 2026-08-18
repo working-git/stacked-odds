@@ -1,0 +1,16 @@
+<div class="sysinfo">
+    <p class="sysinfo__prompt"><span class="prompt-glyph">❯</span> neofetch</p>
+    <div class="sysinfo__panel">
+        <p class="sysinfo__title">visitor@{{ site.Title | urlize }}</p>
+        <p class="sysinfo__rule">------------------------</p>
+        <dl class="sysinfo__list">
+            <div class="sysinfo__row"><dt>OS</dt><dd>Hugo (static)</dd></div>
+            <div class="sysinfo__row"><dt>Theme</dt><dd>risotto</dd></div>
+            <div class="sysinfo__row"><dt>Palette</dt><dd>{{ site.Params.theme.palette | default "base16-dark" }}</dd></div>
+            <div class="sysinfo__row"><dt>Shell</dt><dd>zsh</dd></div>
+            <div class="sysinfo__row"><dt>Sections</dt><dd>{{ len site.Sections }}</dd></div>
+            <div class="sysinfo__row"><dt>Pages</dt><dd>{{ len site.RegularPages }}</dd></div>
+            <div class="sysinfo__row"><dt>Generator</dt><dd>hugo {{ hugo.Version }}</dd></div>
+        </dl>
+    </div>
+</div>

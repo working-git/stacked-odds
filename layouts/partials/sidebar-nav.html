@@ -1,0 +1,15 @@
+{{ $current := . }}
+{{ $sections := .Site.Sections.ByTitle }}
+{{ $count := len $sections }}
+<div class="sidebar-nav">
+    <h2 class="sidebar-nav__title">Contents</h2>
+    <ul class="sidebar-nav__list">
+        {{ range $i, $s := $sections }}
+        <li class="sidebar-nav__item">
+            <span class="sidebar-nav__glyph" aria-hidden="true">{{ if eq (add $i 1) $count }}└──{{ else }}├──{{ end }}</span>
+            <a class="sidebar-nav__link{{ if or (eq $current $s) ($current.IsDescendant $s) }} active{{ end }}" href="{{ $s.Permalink }}">{{ $s.Title }}/</a>
+            <span class="sidebar-nav__count">{{ len $s.RegularPages }}</span>
+        </li>
+        {{ end }}
+    </ul>
+</div>

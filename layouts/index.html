@@ -1,0 +1,35 @@
+{{ define "main" }}
+    <div class="hero">
+        <p class="hero__prompt"><span class="prompt-glyph">❯</span> whoami</p>
+        <h1 class="hero__name">{{ site.Title }}<span class="cursor" aria-hidden="true"></span></h1>
+        <p class="hero__tagline">{{ with site.Params.about.description }}{{ . | markdownify }}{{ else }}welcome — thanks for stopping by.{{ end }}</p>
+    </div>
+
+    {{ .Content }}
+
+    <div class="hero__section">
+        <p class="hero__prompt"><span class="prompt-glyph">❯</span> ls side-quest/ -t</p>
+        {{ $all := slice }}
+        {{ with site.GetPage "/side-quest" }}{{ $all = .RegularPages.ByDate.Reverse }}{{ end }}
+        {{ $recent := first 5 $all }}
+        {{ if $recent }}
+        <ul class="post-listing">
+            {{ range $recent }}
+            <li class="post-listing__item">
+                <span class="post-listing__date">{{ .Date.Format "2006-01-02" }}</span>
+                <div class="post-listing__body">
+                    <a class="post-listing__title" href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+                    {{ with .Params.description }}<p class="post-listing__excerpt">{{ . }}</p>
+                    {{ else }}<p class="post-listing__excerpt">{{ .Summary | plainify | truncate 120 }}</p>{{ end }}
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+        {{ if gt (len $all) 5 }}
+        <a class="hero__more" href="{{ "/side-quest/" | relLangURL }}">&rarr; ls -la side-quest/</a>
+        {{ end }}
+        {{ else }}
+        <p class="hero__empty">// nothing published yet</p>
+        {{ end }}
+    </div>
+{{ end }}
