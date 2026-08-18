@@ -156,8 +156,8 @@
         {{ $next := .NextInSection }}
         {{ if or $prev $next }}
         <nav class="post-nav">
-            {{ with $prev }}<a class="post-nav__link post-nav__link--prev" href="{{ .Permalink }}">&larr; {{ .Title | markdownify }}</a>{{ end }}
-            {{ with $next }}<a class="post-nav__link post-nav__link--next" href="{{ .Permalink }}">{{ .Title | markdownify }} &rarr;</a>{{ end }}
+            {{ with $prev }}<a class="post-nav__link post-nav__link--prev" href="{{ .RelPermalink }}">&larr; {{ .Title | markdownify }}</a>{{ end }}
+            {{ with $next }}<a class="post-nav__link post-nav__link--next" href="{{ .RelPermalink }}">{{ .Title | markdownify }} &rarr;</a>{{ end }}
         </nav>
         {{ end }}
     </footer>
