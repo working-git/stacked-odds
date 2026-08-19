@@ -2,7 +2,7 @@
     <div class="hero">
         <p class="hero__prompt"><span class="prompt-glyph">❯</span> whoami</p>
         <h1 class="hero__name">{{ site.Title }}<span class="cursor" aria-hidden="true"></span></h1>
-        <p class="hero__tagline">{{ with site.Params.about.description }}{{ . | markdownify }}{{ else }}welcome — thanks for stopping by.{{ end }}</p>
+        <p class="hero__tagline">{{ with site.Params.about.description }}{{ . | markdownify }}{{ else }}Time to get questing.{{ end }}</p>
     </div>
 
     {{ .Content }}
